@@ -1,4 +1,4 @@
-unit ConsultaMaster;
+unit ConsultaMestre;
 
 interface
 
@@ -29,10 +29,11 @@ uses
   cxButtons, XData.Web.Connection, XData.Web.Client, PessoasService,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, PessoaModel, Generics.Collections;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, PessoaModel, Generics.Collections,
+  PessoasController;
 
 type
-  TConsultaM = class(TForm)
+  TConsM = class(TForm)
     dxLayoutControl1Group_Root: TdxLayoutGroup;
     dxLayoutControl1: TdxLayoutControl;
     cxGrid1Level1: TcxGridLevel;
@@ -48,51 +49,32 @@ type
     cxGrid1DBTableView1: TcxGridDBTableView;
     cxGrid1DBTableView1Column1: TcxGridDBColumn;
     cxGrid1DBTableView1Column2: TcxGridDBColumn;
-    XDataWebConnection1: TXDataWebConnection;
+    procedure cxGrid1DBTableView1DblClick(Sender: TObject);
   private
+    procedure PopularMemTable(list: TList<TObject>; memTable: TFDMemTable);
   public
     class function Consultar(parent: TForm): Integer;
   end;
 
 var
-  FPessoasService: TPessoasService;
-  Consulta: TConsultaM;
+  Consulta: TConsM;
 
 
 implementation
 
 {$R *.dfm}
 
-class function TConsultaM.Consultar(parent: TForm): Integer;
-var
-  consulta: TConsultaM;
-  pessoas: TList<TPessoa>;
-  pessoa: TPessoa;
-  i: integer;
+class function TConsM.Consultar(parent: TForm): Integer;
 begin
-  try
-    consulta := TConsultaM.Create(parent);
-    FPessoasService := TPessoasService.Create(parent);
-    pessoas := FPessoasService.Index;
-    consulta.MemTable.Open;
-    for pessoa in pessoas do
-    begin
-      with consulta do
-      begin
-        MemTable.Insert;
-        MemTable.FieldByName('id').AsInteger := pessoa.id;
-        MemTable.FieldByName('descricao').AsString := pessoa.nome;
-        MemTable.Post;
-      end;
-    end;
-    if (consulta.ShowModal = mrOk) then
-      result := consulta.MemTable.FieldByName('id').AsInteger
-    else
-      result := 0
-  finally
-    FPessoasService.Destroy;
-    consulta.Free;
-  end;
+end;
+
+procedure TConsM.cxGrid1DBTableView1DblClick(Sender: TObject);
+begin
+  btnOK.Click;
+end;
+
+procedure TConsM.PopularMemTable(list: TList<TObject>; memTable: TFDMemTable);
+begin
 
 end;
 

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ConsultaMaster, cxGraphics, cxControls,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ConsultaMestre, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinBasic, dxSkinBlack,
   dxSkinBlue, dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkroom,
   dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
@@ -23,23 +23,69 @@ uses
   dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint, dxSkinWXI,
   dxSkinXmas2008Blue, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxEdit, cxNavigator, dxDateRanges, dxScrollbarAnnotations, Data.DB, cxDBData,
-  dxLayoutContainer, cxGridLevel, cxClasses, cxGridCustomView,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
-  dxLayoutControl;
+  Vcl.Menus, dxLayoutContainer, dxLayoutControlAdapters, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, XData.Web.Connection,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, cxButtons,
+  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxClasses, cxGridCustomView, cxGrid, dxLayoutControl, PessoaModel,
+  Generics.Collections, PessoasController;
 
 type
-  TConsultaPessoa = class(TConsultaM)
+  TConPessoas = class(TConsM)
   private
-    { Private declarations }
+    procedure PopularMemTable(list: TList<TObject>; memTable: TFDMemTable);
   public
-    { Public declarations }
+    class function Consultar(parent: TForm): Integer;
   end;
 
 var
-  ConsultaPessoa: TConsultaPessoa;
+  ConPessoas: TConPessoas;
 
 implementation
 
 {$R *.dfm}
+
+class function TConPessoas.Consultar(parent: TForm): Integer;
+var
+  consulta: TConPessoas;
+  controller: TPessoasController;
+  pessoas: TList<TPessoa>;
+  pessoa: TPessoa;
+  i: integer;
+begin
+  consulta := TConPessoas.Create(parent);
+  controller := TPessoasController.Create(parent);
+  try
+    pessoas := controller.Index;
+    consulta.PopularMemTable(TList<TObject>(pessoas), consulta.MemTable);
+
+    if (consulta.ShowModal = mrOk) then
+      result := consulta.MemTable.FieldByName('id').AsInteger
+    else
+      result := 0
+  finally
+    controller.Destroy;
+    consulta.Free;
+  end;
+end;
+
+procedure TConPessoas.PopularMemTable(list: TList<TObject>; memTable: TFDMemTable);
+var
+  pessoa: TPessoa;
+  pessoas: TList<TPessoa>;
+begin
+  memTable.Open;
+  pessoas := TList<TPessoa>(list);
+
+  for pessoa in pessoas do
+  begin
+    memTable.Insert;
+    memTable.FieldByName('id').AsInteger := pessoa.id;
+    memTable.FieldByName('descricao').AsString := pessoa.nome;
+    memTable.Post;
+  end;
+end;
+
 
 end.

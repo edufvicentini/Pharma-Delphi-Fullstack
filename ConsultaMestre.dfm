@@ -1,36 +1,43 @@
-object ConsultaM: TConsultaM
+object ConsM: TConsM
   Left = 0
   Top = 0
+  BorderStyle = bsNone
   Caption = 'Consulta'
-  ClientHeight = 440
-  ClientWidth = 620
+  ClientHeight = 478
+  ClientWidth = 632
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poMainFormCenter
   TextHeight = 15
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 620
-    Height = 440
+    Width = 632
+    Height = 478
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 616
+    ExplicitHeight = 439
     object cxGrid1: TcxGrid
       Left = 12
       Top = 12
-      Width = 596
-      Height = 384
+      Width = 608
+      Height = 422
       TabOrder = 0
       object cxGrid1DBTableView1: TcxGridDBTableView
+        OnDblClick = cxGrid1DBTableView1DblClick
         Navigator.Buttons.CustomButtons = <>
         ScrollbarAnnotations.CustomAnnotations = <>
         DataController.DataSource = DSGrid
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsSelection.CellSelect = False
+        OptionsView.GroupByBox = False
         object cxGrid1DBTableView1Column1: TcxGridDBColumn
           DataBinding.FieldName = 'id'
           DataBinding.IsNullValueType = True
@@ -39,6 +46,8 @@ object ConsultaM: TConsultaM
           Caption = 'servico'
           DataBinding.FieldName = 'descricao'
           DataBinding.IsNullValueType = True
+          Options.AutoWidthSizable = False
+          Width = 177
         end
       end
       object cxGrid1Level1: TcxGridLevel
@@ -46,9 +55,9 @@ object ConsultaM: TConsultaM
       end
     end
     object btnOK: TcxButton
-      Left = 314
-      Top = 403
-      Width = 294
+      Left = 320
+      Top = 441
+      Width = 300
       Height = 25
       Caption = 'OK'
       ModalResult = 1
@@ -56,8 +65,8 @@ object ConsultaM: TConsultaM
     end
     object btnCancelar: TcxButton
       Left = 12
-      Top = 403
-      Width = 295
+      Top = 441
+      Width = 301
       Height = 25
       Caption = 'Cancelar'
       ModalResult = 2
@@ -139,10 +148,5 @@ object ConsultaM: TConsultaM
     DataSet = MemTable
     Left = 360
     Top = 144
-  end
-  object XDataWebConnection1: TXDataWebConnection
-    URL = 'http://localhost:2001/tsm/xdata/servico'
-    Left = 304
-    Top = 224
   end
 end

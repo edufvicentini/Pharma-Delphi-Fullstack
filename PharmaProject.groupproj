@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{51D6499B-DE51-45EE-81FF-E0DFADB25548}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Server\PharmaServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Pharma.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PharmaServer">
+        <MSBuild Projects="Server\PharmaServer.dproj"/>
+    </Target>
+    <Target Name="PharmaServer:Clean">
+        <MSBuild Projects="Server\PharmaServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PharmaServer:Make">
+        <MSBuild Projects="Server\PharmaServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Pharma">
+        <MSBuild Projects="Pharma.dproj"/>
+    </Target>
+    <Target Name="Pharma:Clean">
+        <MSBuild Projects="Pharma.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Pharma:Make">
+        <MSBuild Projects="Pharma.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PharmaServer;Pharma"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PharmaServer:Clean;Pharma:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PharmaServer:Make;Pharma:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -1,56 +1,68 @@
 unit PessoasController;
 
 interface
-uses XData.Web.Connection, XData.Web.Client, Generics.Collections;
+uses XData.Web.Connection, XData.Web.Client, XData.Client, Generics.Collections,
+PessoaModel, ServicoModel, System.Classes, System.SysUtils;
 
 type
   TPessoasController = class
-    xDataConnection: TXDataWebConnection;
-    xDataWebClient: TXDataWebClient;
+    constructor Create(Parent: TComponent);
+    destructor Destroy;
   private
-    procedure Connect;
-    procedure IndexLoad(Response: TXDataClientResponse);
+    xDataClient: TXDataClient;
   public
-    function Index: TList<TObject>;
-    function Create(data: TObject): integer;
-    function Find(Id: integer): TObject;
+    FResponse: TXDataClientResponse;
+    function Index: TList<TPessoa>;
+    function CreateNew(data: TPessoa): Boolean;
+    function Find(Id: integer): TPessoa;
   end;
 
 implementation
 
-procedure TPessoasController.Connect();
+constructor TPessoasController.Create(Parent: TComponent);
 begin
-  xDataConnection.URL := 'localhost:3001/tsm/xdata';
-  xDataConnection.Open;
-  xDataWebClient.Connection := xDataConnection;
+  xDataClient := TXDataClient.Create;
+  xDataClient.Uri := 'http://localhost:2001/tms/xdata';
 end;
 
-function TPessoasController.Index: TList<TObject>;
+destructor TPessoasController.Destroy;
 begin
-  Connect;
+  xDataClient.Free;
+end;
 
+function TPessoasController.Index: TList<TPessoa>;
+var
+  pessoas: TList<TPessoa>;
+  Response: TXDataClientResponse;
+begin
   try
-    xDataWebClient.OnLoad := IndexLoad;
-    xDataWebClient.List('Pessoas');
-    xDataWebClient.OnLoad
+    pessoas := xDataClient.List<TPessoa>;
+    result := pessoas;
   finally
-
   end;
 end;
 
-procedure IndexLoad(Response: TXDataClientResponse);
+function TPessoasController.CreateNew(data: TPessoa): Boolean;
+var
+  pessoa: TPessoa;
 begin
-
+  try
+    xDataClient.Post(data);
+    result := True;
+  except
+    on E:Exception do
+      result := False;
+  end;
 end;
 
-function TPessoasController.Create(data: TObject): integer;
+function TPessoasController.Find(Id: integer): TPessoa;
 begin
-
-end;
-
-function TPessoasController.Find(Id: integer): TObject;
-begin
-
+  try
+    result := xDataClient.Get<TPessoa>(Id);
+  except
+    on E:Exception do
+      result := nil;
+  end;
 end;
 
 end.

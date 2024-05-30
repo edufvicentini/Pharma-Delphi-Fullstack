@@ -1,50 +1,50 @@
-unit PessoasService;
+unit PessoasTipoController;
 
 interface
 uses XData.Web.Connection, XData.Web.Client, XData.Client, Generics.Collections,
-PessoaModel, ServicoModel, System.Classes, System.SysUtils;
+PessoaTipoModel, System.Classes, System.SysUtils;
 
 type
-  TPessoasService = class
+  TPessoasTipoController = class
     constructor Create(Parent: TComponent);
     destructor Destroy;
   private
     xDataClient: TXDataClient;
   public
     FResponse: TXDataClientResponse;
-    function Index: TList<TPessoa>;
-    function CreateNew(data: TPessoa): Boolean;
-    function Find(Id: integer): TPessoa;
+    function Index: TList<TPessoaTipo>;
+    function CreateNew(data: TPessoaTipo): Boolean;
+    function Find(Id: integer): TPessoaTipo;
   end;
 
 implementation
 
-constructor TPessoasService.Create(Parent: TComponent);
+constructor TPessoasTipoController.Create(Parent: TComponent);
 begin
   xDataClient := TXDataClient.Create;
   xDataClient.Uri := 'http://localhost:2001/tms/xdata';
 end;
 
-destructor TPessoasService.Destroy;
+destructor TPessoasTipoController.Destroy;
 begin
   xDataClient.Free;
 end;
 
-function TPessoasService.Index: TList<TPessoa>;
+function TPessoasTipoController.Index: TList<TPessoaTipo>;
 var
-  pessoas: TList<TPessoa>;
+  pessoas: TList<TPessoaTipo>;
   Response: TXDataClientResponse;
 begin
   try
-    pessoas := xDataClient.List<TPessoa>;
+    pessoas := xDataClient.List<TPessoaTipo>;
     result := pessoas;
   finally
   end;
 end;
 
-function TPessoasService.CreateNew(data: TPessoa): Boolean;
+function TPessoasTipoController.CreateNew(data: TPessoaTipo): Boolean;
 var
-  pessoa: TPessoa;
+  pessoa: TPessoaTipo;
 begin
   try
     xDataClient.Post(data);
@@ -55,10 +55,10 @@ begin
   end;
 end;
 
-function TPessoasService.Find(Id: integer): TPessoa;
+function TPessoasTipoController.Find(Id: integer): TPessoaTipo;
 begin
   try
-    result := xDataClient.Get<TPessoa>(Id);
+    result := xDataClient.Get<TPessoaTipo>(Id);
   except
     on E:Exception do
       result := nil;

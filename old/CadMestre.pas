@@ -1,4 +1,4 @@
-unit Principal;
+unit CadMestre;
 
 interface
 
@@ -21,16 +21,27 @@ uses
   dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinTheBezier, dxSkinValentine,
   dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
   dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint, dxSkinWXI,
-  dxSkinXmas2008Blue, cxClasses, dxLayoutContainer, dxLayoutControl,
-  dxLayoutControlAdapters, Vcl.Menus, Vcl.StdCtrls, cxButtons, ConsultaMaster;
+  dxSkinXmas2008Blue, cxClasses, dxLayoutContainer,
+  dxLayoutControlAdapters, Vcl.Menus, Vcl.StdCtrls, cxButtons, ConsultaMestre,
+  PessoaModel, PessoaTipoModel, DateUtils, PessoasService, dxLayoutControl;
 
 type
-  TForm1 = class(TForm)
+  TCadM = class(TForm)
     dxLayoutControl1Group_Root: TdxLayoutGroup;
-    dxLayoutControl1: TdxLayoutControl;
     btnConsulta: TcxButton;
     dxLayoutItem1: TdxLayoutItem;
-    procedure btnConsultaClick(Sender: TObject);
+    btnNovo: TcxButton;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutSeparatorItem1: TdxLayoutSeparatorItem;
+    dxLayoutItem4: TdxLayoutItem;
+    btnExcluir: TcxButton;
+    dxLayoutItem5: TdxLayoutItem;
+    btnVoltar: TcxButton;
+    dxLayoutItem6: TdxLayoutItem;
+    btnCancelar: TcxButton;
+    dxLayoutItem7: TdxLayoutItem;
+    procedure btnVoltarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,22 +49,16 @@ type
   end;
 
 var
-  Form1: TForm1;
+  CadM: TCadM;
+  FPessoasService: TPessoasService;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.btnConsultaClick(Sender: TObject);
-var
-  Consulta: TConsultaM;
-  codigo: integer;
+procedure TCadM.btnVoltarClick(Sender: TObject);
 begin
-  try
-    codigo := TConsultaM.Consultar(self);
-    ShowMessage(varToStr(codigo));
-  finally
-  end;
+  self.Close;
 end;
 
 end.

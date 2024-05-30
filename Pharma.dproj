@@ -99,26 +99,34 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Principal.pas">
-            <Form>Form1</Form>
+        <DCCReference Include="ConsultaMestre.pas">
+            <Form>ConsM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="ConsultaMaster.pas">
-            <Form>Consulta</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="ConsultaPessoas.pas">
-            <Form>ConsultaPessoa</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="PessoasService.pas"/>
+        <DCCReference Include="PessoasController.pas"/>
         <DCCReference Include="Models\AtendimentoModel.pas"/>
         <DCCReference Include="Models\AtendimentoServicoModel.pas"/>
         <DCCReference Include="Models\PessoaModel.pas"/>
         <DCCReference Include="Models\PessoaTipoModel.pas"/>
         <DCCReference Include="Models\ServicoModel.pas"/>
         <DCCReference Include="Models\ServicoTipoModel.pas"/>
-        <DCCReference Include="Models\UnitName.pas"/>
+        <DCCReference Include="Main.pas">
+            <Form>Principal</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ConsultaPessoas.pas">
+            <Form>ConPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="PessoasTipoController.pas"/>
+        <DCCReference Include="CadMestre.pas">
+            <Form>CadM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="CadPessoas.pas">
+            <Form>FrmPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
