@@ -17,7 +17,8 @@ uses
   PessoasController in 'Controllers\PessoasController.pas',
   PessoasTipoController in 'Controllers\PessoasTipoController.pas',
   ServicosController in 'Controllers\ServicosController.pas',
-  ServicosTipoController in 'Controllers\ServicosTipoController.pas';
+  ServicosTipoController in 'Controllers\ServicosTipoController.pas',
+  ConsultaServicos in 'ConsultaServicos.pas' {ConServicos};
 
 {$R *.res}
 
@@ -25,5 +26,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TPrincipal, Principal);
+  Application.CreateForm(TConServicos, ConServicos);
   Application.Run;
 end.

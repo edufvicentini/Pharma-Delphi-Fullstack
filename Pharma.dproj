@@ -133,6 +133,10 @@
         <DCCReference Include="Controllers\PessoasTipoController.pas"/>
         <DCCReference Include="Controllers\ServicosController.pas"/>
         <DCCReference Include="Controllers\ServicosTipoController.pas"/>
+        <DCCReference Include="ConsultaServicos.pas">
+            <Form>ConServicos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
