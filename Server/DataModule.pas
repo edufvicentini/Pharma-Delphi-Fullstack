@@ -32,7 +32,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-{$R *.dfm}                                                       P
+{$R *.dfm}
 
 procedure TServerContainer.XDataServerModuleCreate(Sender: TObject;
   Module: TXDataServerModule);

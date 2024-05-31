@@ -24,9 +24,17 @@ type
     
     [Column('descricao', [], 100)]
     Fdescricao: Nullable<string>;
+    
+    [Column('created_at', [])]
+    Fcreated_at: Nullable<TDateTime>;
+    
+    [Column('updated_at', [TColumnProp.Required])]
+    Fupdated_at: TDateTime;
   public
     property id: Integer read Fid write Fid;
     property descricao: Nullable<string> read Fdescricao write Fdescricao;
+    property created_at: Nullable<TDateTime> read Fcreated_at write Fcreated_at;
+    property updated_at: TDateTime read Fupdated_at write Fupdated_at;
   end;
   
 implementation

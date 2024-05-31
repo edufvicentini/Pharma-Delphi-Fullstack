@@ -13,8 +13,6 @@ type
   public
     FResponse: TXDataClientResponse;
     function Index: TList<TPessoaTipo>;
-    function CreateNew(data: TPessoaTipo): Boolean;
-    function Find(Id: integer): TPessoaTipo;
   end;
 
 implementation
@@ -39,29 +37,6 @@ begin
     pessoas := xDataClient.List<TPessoaTipo>;
     result := pessoas;
   finally
-  end;
-end;
-
-function TPessoasTipoController.CreateNew(data: TPessoaTipo): Boolean;
-var
-  pessoa: TPessoaTipo;
-begin
-  try
-    xDataClient.Post(data);
-    result := True;
-  except
-    on E:Exception do
-      result := False;
-  end;
-end;
-
-function TPessoasTipoController.Find(Id: integer): TPessoaTipo;
-begin
-  try
-    result := xDataClient.Get<TPessoaTipo>(Id);
-  except
-    on E:Exception do
-      result := nil;
   end;
 end;
 

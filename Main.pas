@@ -22,7 +22,7 @@ uses
   dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
   dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint, dxSkinWXI,
   dxSkinXmas2008Blue, cxClasses, dxLayoutContainer, dxLayoutControl,
-  Vcl.StdCtrls, dxCustomTileControl, dxTileControl, CadPessoas;
+  Vcl.StdCtrls, dxCustomTileControl, dxTileControl, CadPessoas, CadServicos;
 
 type
   TPrincipal = class(TForm)
@@ -41,6 +41,7 @@ type
     dxLayoutItem2: TdxLayoutItem;
     procedure btnSairClick(Sender: TdxTileControlItem);
     procedure btnPessoasClick(Sender: TdxTileControlItem);
+    procedure btnServiçosClick(Sender: TdxTileControlItem);
   private
     { Private declarations }
   public
@@ -65,6 +66,14 @@ end;
 procedure TPrincipal.btnSairClick(Sender: TdxTileControlItem);
 begin
   Application.Terminate();
+end;
+
+procedure TPrincipal.btnServiçosClick(Sender: TdxTileControlItem);
+var
+  cad: TFrmServicos;
+begin
+  cad := TFrmServicos.Create(self);
+  cad.Show;
 end;
 
 end.

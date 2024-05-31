@@ -23,17 +23,17 @@ type
     [Column('id', [TColumnProp.Required, TColumnProp.NoInsert, TColumnProp.NoUpdate])]
     Fid: Integer;
     
-    [Column('created_at', [TColumnProp.Required])]
-    Fcreated_at: TDateTime;
-    
-    [Column('updated_at', [TColumnProp.Required])]
-    Fupdated_at: TDateTime;
-    
     [Column('observacao', [], 100)]
     Fobservacao: Nullable<string>;
     
     [Column('valor_total', [TColumnProp.Required], 50)]
     Fvalor_total: Double;
+    
+    [Column('created_at', [TColumnProp.Required])]
+    Fcreated_at: TDateTime;
+    
+    [Column('updated_at', [TColumnProp.Required])]
+    Fupdated_at: TDateTime;
     
     [Association([TAssociationProp.Lazy, TAssociationProp.Required], CascadeTypeAll - [TCascadeType.Remove])]
     [JoinColumn('responsavel', [TColumnProp.Required], 'id')]
@@ -48,10 +48,10 @@ type
     procedure SetPaciente(const Value: TPessoa);
   public
     property id: Integer read Fid write Fid;
-    property created_at: TDateTime read Fcreated_at write Fcreated_at;
-    property updated_at: TDateTime read Fupdated_at write Fupdated_at;
     property observacao: Nullable<string> read Fobservacao write Fobservacao;
     property valor_total: Double read Fvalor_total write Fvalor_total;
+    property created_at: TDateTime read Fcreated_at write Fcreated_at;
+    property updated_at: TDateTime read Fupdated_at write Fupdated_at;
     property Responsavel: TPessoa read GetResponsavel write SetResponsavel;
     property Paciente: TPessoa read GetPaciente write SetPaciente;
   end;

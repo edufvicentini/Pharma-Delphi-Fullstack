@@ -43,6 +43,7 @@ object CadM: TCadM
       Height = 25
       Caption = 'Novo'
       TabOrder = 2
+      OnClick = btnNovoClick
     end
     object btnConsultar: TcxButton
       Left = 12
@@ -59,6 +60,7 @@ object CadM: TCadM
       Height = 25
       Caption = 'Editar'
       TabOrder = 4
+      OnClick = btnEditarClick
     end
     object btnExcluir: TcxButton
       Left = 12
@@ -67,6 +69,7 @@ object CadM: TCadM
       Height = 25
       Caption = 'Excluir'
       TabOrder = 5
+      OnClick = btnExcluirClick
     end
     object btnVoltar: TcxButton
       Left = 12
@@ -84,6 +87,7 @@ object CadM: TCadM
       Height = 25
       Caption = 'Confirmar'
       TabOrder = 10
+      OnClick = btnConfirmarClick
     end
     object btnCancelar: TcxButton
       Left = 448
@@ -92,6 +96,7 @@ object CadM: TCadM
       Height = 25
       Caption = 'Cancelar'
       TabOrder = 9
+      OnClick = btnCancelarClick
     end
     object edtCodigo: TcxDBTextEdit
       Left = 107
@@ -308,6 +313,12 @@ object CadM: TCadM
     end
   end
   object CadastroMemTable: TFDMemTable
+    AfterOpen = CadastroMemTableAfterOpen
+    AfterClose = CadastroMemTableAfterClose
+    AfterInsert = CadastroMemTableAfterInsert
+    AfterEdit = CadastroMemTableAfterEdit
+    AfterPost = CadastroMemTableAfterPost
+    AfterCancel = CadastroMemTableAfterCancel
     FieldDefs = <
       item
         Name = 'id'

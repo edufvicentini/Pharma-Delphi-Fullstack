@@ -1,4 +1,4 @@
-unit ConsultaPessoas;
+unit ConsultaServicos;
 
 interface
 
@@ -25,17 +25,17 @@ uses
   cxEdit, cxNavigator, dxDateRanges, dxScrollbarAnnotations, Data.DB, cxDBData,
   Vcl.Menus, dxLayoutContainer, dxLayoutControlAdapters, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
-  FireDAC.Phys.Intf, FireDAC.DApt.Intf, XData.Web.Connection,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, cxButtons,
-  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxClasses, cxGridCustomView, cxGrid, dxLayoutControl, PessoaModel,
-  Generics.Collections, PessoasController;
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, Vcl.StdCtrls, cxButtons, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
+  cxGridCustomView, cxGrid, dxLayoutControl, ServicosController, ServicoModel,
+  ServicoTipoModel, Generics.Collections;
 
 type
-  TConPessoas = class(TConsM)
-    columnNome: TcxGridDBColumn;
-    columnTipo: TcxGridDBColumn;
-    columnCPF: TcxGridDBColumn;
+  TConServicos = class(TConsM)
+    cxGrid1DBTableView1Column1: TcxGridDBColumn;
+    cxGrid1DBTableView1Column2: TcxGridDBColumn;
+    cxGrid1DBTableView1Column3: TcxGridDBColumn;
   private
     procedure PopularMemTable(list: TList<TObject>; memTable: TFDMemTable);
   public
@@ -43,25 +43,25 @@ type
   end;
 
 var
-  ConPessoas: TConPessoas;
+  ConServicos: TConServicos;
 
 implementation
 
 {$R *.dfm}
 
-class function TConPessoas.Consultar(parent: TForm): Integer;
+class function TConServicos.Consultar(parent: TForm): Integer;
 var
-  consulta: TConPessoas;
-  controller: TPessoasController;
-  pessoas: TList<TPessoa>;
-  pessoa: TPessoa;
+  consulta: TConServicos;
+  controller: TServicosController;
+  servicos: TList<TServico>;
+  servico: TServico;
   i: integer;
 begin
-  consulta := TConPessoas.Create(parent);
-  controller := TPessoasController.Create(parent);
+  consulta := TConServicos.Create(parent);
+  controller := TServicosController.Create(parent);
   try
-    pessoas := controller.Index;
-    consulta.PopularMemTable(TList<TObject>(pessoas), consulta.MemTable);
+    servicos := controller.Index;
+    consulta.PopularMemTable(TList<TObject>(servicos), consulta.MemTable);
 
     if (consulta.ShowModal = mrOk) then
       result := consulta.MemTable.FieldByName('id').AsInteger
@@ -73,26 +73,25 @@ begin
   end;
 end;
 
-procedure TConPessoas.PopularMemTable(list: TList<TObject>; memTable: TFDMemTable);
+procedure TConServicos.PopularMemTable(list: TList<TObject>; memTable: TFDMemTable);
 var
-  pessoa: TPessoa;
-  pessoas: TList<TPessoa>;
+  servico: TServico;
+  servicos: TList<TServico>;
 begin
   memTable.Open;
-  pessoas := TList<TPessoa>(list);
+  servicos := TList<TServico>(list);
 
-  for pessoa in pessoas do
+  for servico in servicos do
   begin
     memTable.Insert;
-    memTable.FieldByName('id').AsInteger := pessoa.id;
-    memTable.FieldByName('nome').AsString := pessoa.nome;
-//    memTable.FieldByName('codigoCpf').AsString := pessoa.cpf;
-    memTable.FieldByName('tipo').AsString := pessoa.tipo.descricao;
-    memTable.FieldByName('created_at').AsDateTime := pessoa.tipo.created_at;
-    memTable.FieldByName('updated_at').AsDateTime := pessoa.tipo.updated_at;
+    memTable.FieldByName('id').AsInteger := servico.id;
+    memTable.FieldByName('descricao').AsString := servico.descricao;
+    memTable.FieldByName('valor').AsFloat := servico.valor;
+    memTable.FieldByName('tipo').AsString := servico.tipo.descricao;
+    memTable.FieldByName('created_at').AsDateTime := servico.tipo.created_at;
+    memTable.FieldByName('updated_at').AsDateTime := servico.tipo.updated_at;
     memTable.Post;
   end;
 end;
-
 
 end.

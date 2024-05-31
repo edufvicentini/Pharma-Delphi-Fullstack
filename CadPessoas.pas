@@ -28,7 +28,8 @@ uses
   PessoasController, PessoasTipoController, PessoaModel, PessoaTipoModel,
   ConsultaPessoas, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  cxDBEdit, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  cxDBEdit, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.DBCtrls,
+  Generics.Collections, DateUtils;
 
 type
   TFrmPessoas = class(TCadM)
@@ -36,14 +37,22 @@ type
     edtNome: TcxDBTextEdit;
     liedtCPF: TdxLayoutItem;
     edtCPF: TcxDBTextEdit;
+    MemTableLookup: TFDMemTable;
+    DSLookup: TDataSource;
+    DBLookupComboBox1: TDBLookupComboBox;
+    cbxLookupTipoPessoa: TdxLayoutItem;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure btnNovoClick(Sender: TObject);
+    procedure btnConfirmarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     FPessoasController : TPessoasController;
     FPessoasTipoController : TPessoasTipoController;
-    procedure AlimentaCadastro(pessoa: TPessoa);
+    procedure PessoasObjetoParaMemTable(pessoa: TPessoa);
+    function PessoasMemTableParaObjeto: TPessoa;
+    procedure CarregaLookup;
+    procedure updateGUI;
   public
     { Public declarations }
   end;
@@ -55,6 +64,62 @@ implementation
 
 {$R *.dfm}
 
+procedure TFrmPessoas.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FPessoasController := TPessoasController.Create(self);
+  FPessoasTipoController := TPessoasTipoController.Create(self);
+  CarregaLookup;
+end;
+
+procedure TFrmPessoas.CarregaLookup;
+var
+  pessoaTipoLista: TList<TPessoaTipo>;
+  pessoaTipo: TPessoaTipo;
+begin
+  pessoaTipoLista := FPessoasTipoController.Index;
+  MemTableLookup.Open;
+  for pessoaTipo in pessoaTipoLista do
+  begin
+    MemTableLookup.Insert;
+    MemTableLookup.FieldByName('id').AsInteger := pessoaTipo.id;
+    MemTableLookup.FieldByName('descricao').AsString := pessoaTipo.descricao;
+    MemTableLookup.FieldByName('created_at').AsDateTime := pessoaTipo.created_at;
+    MemTableLookup.FieldByName('updated_at').AsDateTime := pessoaTipo.updated_at;
+    MemTableLookup.Post;
+  end;
+end;
+
+procedure TFrmPessoas.btnConfirmarClick(Sender: TObject);
+var
+  pessoa: TPessoa;
+  pessoaTipo: TPessoaTipo;
+  isEditando: Boolean;
+  modified: boolean;
+begin
+  inherited;
+  if (CadastroMemTable.State = TDatasetState.dsEdit) then
+    isEditando := True;
+
+  //CadastroMemTable.Post;
+  pessoa := PessoasMemTableParaObjeto;
+  try
+    if isEditando then
+      modified := FPessoasController.Edit(pessoa)
+    else
+      modified := FPessoasController.CreateNew(pessoa);
+
+    ShowMessage('Cadastro Alterado')
+  except
+    on E:Exception do
+    begin
+      modified := False;
+      ShowMessage(E.Message);
+    end;
+  end;
+
+end;
+
 procedure TFrmPessoas.btnConsultarClick(Sender: TObject);
 var
   codigo: Integer;
@@ -65,21 +130,25 @@ begin
     if (codigo <> 0) then
     begin
       pessoa := FPessoasController.Find(codigo);
-      AlimentaCadastro(pessoa);
+      PessoasObjetoParaMemTable(pessoa);
     end;
   finally
+    updateGUI;
   end;
 end;
 
-procedure TFrmPessoas.btnNovoClick(Sender: TObject);
+procedure TFrmPessoas.btnExcluirClick(Sender: TObject);
+var
+  pessoa: TPessoa;
 begin
   inherited;
+  pessoa := PessoasMemTableParaObjeto;
+  FPessoasController.Delete(pessoa);
   CadastroMemTable.Close;
-  CadastroMemTable.Open;
-  CadastroMemTable.Insert;
+  ShowMessage('Excluiu');
 end;
 
-procedure TFrmPessoas.AlimentaCadastro(pessoa: TPessoa);
+procedure TFrmPessoas.PessoasObjetoParaMemTable(pessoa: TPessoa);
 begin
   CadastroMemTable.Close;
   CadastroMemTable.Open;
@@ -94,11 +163,32 @@ begin
   CadastroMemTable.Post;
 end;
 
-procedure TFrmPessoas.FormCreate(Sender: TObject);
+function TFrmPessoas.PessoasMemTableParaObjeto: TPessoa;
+var
+  pessoa: TPessoa;
+  pessoaTipo: TPessoaTipo;
+begin
+  pessoa := TPessoa.Create;
+  pessoa.id := CadastroMemTable.FieldByName('id').AsInteger;
+  pessoa.nome := CadastroMemTable.FieldByName('nome').AsString;
+  pessoa.cpf := CadastroMemTable.FieldByName('cpf').AsString;
+  pessoa.created_at := CadastroMemTable.FieldByName('created_at').AsDateTime;
+  pessoa.updated_at := TDateTime.Now;
+
+  pessoaTipo := TPessoaTipo.Create;
+  pessoaTipo.id := MemTableLookup.FieldByName('id').AsInteger;
+  pessoaTipo.descricao := MemTableLookup.FieldByName('descricao').AsString;
+  pessoaTipo.created_at := MemTableLookup.FieldByName('created_at').AsDateTime;
+  pessoaTipo.updated_at := MemTableLookup.FieldByName('updated_at').AsDateTime;
+
+  pessoa.Tipo := pessoaTipo;
+
+  result := pessoa;
+end;
+
+procedure TFrmPessoas.updateGUI;
 begin
   inherited;
-  FPessoasController := TPessoasController.Create(self);
-  FPessoasTipoController := TPessoasTipoController.Create(self);
 end;
 
 procedure TFrmPessoas.FormDestroy(Sender: TObject);

@@ -92,6 +92,7 @@
         Text2.AssignedValues = []
         Text3.AssignedValues = []
         Text4.AssignedValues = []
+        OnClick = btnServiçosClick
       end
       object btnSobre: TdxTileControlItem
         GroupIndex = 1

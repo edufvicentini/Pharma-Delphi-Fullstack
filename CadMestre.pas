@@ -27,7 +27,7 @@ uses
   dxCore, cxDateUtils, cxMaskEdit, cxDropDownEdit, cxCalendar,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, cxDBEdit;
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, cxDBEdit, DateUtils;
 
 type
   TCadM = class(TForm)
@@ -65,8 +65,19 @@ type
     dtModificado: TcxDBDateEdit;
     dxLayoutItem10: TdxLayoutItem;
     procedure btnVoltarClick(Sender: TObject);
+    procedure CadastroMemTableAfterOpen(DataSet: TDataSet);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure CadastroMemTableAfterEdit(DataSet: TDataSet);
+    procedure CadastroMemTableAfterClose(DataSet: TDataSet);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure CadastroMemTableAfterCancel(DataSet: TDataSet);
+    procedure CadastroMemTableAfterPost(DataSet: TDataSet);
+    procedure CadastroMemTableAfterInsert(DataSet: TDataSet);
+    procedure btnConfirmarClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
   private
-    { Private declarations }
+    procedure updateGUI;
   public
     { Public declarations }
   end;
@@ -78,9 +89,77 @@ implementation
 
 {$R *.dfm}
 
+procedure TCadM.btnCancelarClick(Sender: TObject);
+begin
+  CadastroMemTable.Cancel;
+end;
+
+procedure TCadM.btnConfirmarClick(Sender: TObject);
+begin
+  if CadastroMemTable.State in [dsEdit, dsInsert] then
+    CadastroMemTable.Post;
+end;
+
+procedure TCadM.btnEditarClick(Sender: TObject);
+begin
+  CadastroMemTable.Edit;
+end;
+
+procedure TCadM.btnExcluirClick(Sender: TObject);
+begin
+  if (MessageDlg('Deseja mesmo Excluir?', mtConfirmation, [mbYes, mbNo], 0) = mrNo) then
+    abort;
+end;
+
+procedure TCadM.btnNovoClick(Sender: TObject);
+begin
+  CadastroMemTable.Close;
+  CadastroMemTable.Open;
+  CadastroMemTable.Insert;
+  CadastroMemTable.FieldByName('created_at').AsDateTime := TDateTime.Now;
+end;
+
 procedure TCadM.btnVoltarClick(Sender: TObject);
 begin
   self.Close;
+end;
+
+procedure TCadM.CadastroMemTableAfterCancel(DataSet: TDataSet);
+begin
+  updateGUI;
+end;
+
+procedure TCadM.CadastroMemTableAfterClose(DataSet: TDataSet);
+begin
+  updateGUI;
+end;
+
+procedure TCadM.CadastroMemTableAfterEdit(DataSet: TDataSet);
+begin
+  updateGUI;
+end;
+
+procedure TCadM.CadastroMemTableAfterInsert(DataSet: TDataSet);
+begin
+  updateGUI;
+end;
+
+procedure TCadM.CadastroMemTableAfterOpen(DataSet: TDataSet);
+begin
+  updateGUI;
+end;
+
+procedure TCadM.CadastroMemTableAfterPost(DataSet: TDataSet);
+begin
+  updateGUI;
+end;
+
+procedure TCadM.updateGUI;
+begin
+  btnEditar.Enabled := CadastroMemTable.Active and not (CadastroMemTable.State in [dsEdit, dsInsert]);
+  btnExcluir.Enabled := CadastroMemTable.Active and not (CadastroMemTable.State in [dsEdit, dsInsert]);
+  btnConfirmar.Enabled := CadastroMemTable.State in [dsEdit, dsInsert];
+  btnCancelar.Enabled := CadastroMemTable.State in [dsEdit, dsInsert];
 end;
 
 end.

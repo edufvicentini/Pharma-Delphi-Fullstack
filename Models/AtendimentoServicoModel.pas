@@ -24,6 +24,12 @@ type
     [Column('id', [TColumnProp.Required])]
     Fid: Integer;
     
+    [Column('created_at', [])]
+    Fcreated_at: Nullable<TDateTime>;
+    
+    [Column('updated_at', [TColumnProp.Required])]
+    Fupdated_at: TDateTime;
+    
     [Association([TAssociationProp.Lazy, TAssociationProp.Required], CascadeTypeAll - [TCascadeType.Remove])]
     [JoinColumn('atendimento', [TColumnProp.Required], 'id')]
     FAtendimento: Proxy<TAtendimento>;
@@ -37,6 +43,8 @@ type
     procedure SetServico(const Value: TServico);
   public
     property id: Integer read Fid write Fid;
+    property created_at: Nullable<TDateTime> read Fcreated_at write Fcreated_at;
+    property updated_at: TDateTime read Fupdated_at write Fupdated_at;
     property Atendimento: TAtendimento read GetAtendimento write SetAtendimento;
     property Servico: TServico read GetServico write SetServico;
   end;

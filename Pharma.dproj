@@ -103,7 +103,6 @@
             <Form>ConsM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="PessoasController.pas"/>
         <DCCReference Include="Models\AtendimentoModel.pas"/>
         <DCCReference Include="Models\AtendimentoServicoModel.pas"/>
         <DCCReference Include="Models\PessoaModel.pas"/>
@@ -118,7 +117,6 @@
             <Form>ConPessoas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="PessoasTipoController.pas"/>
         <DCCReference Include="CadMestre.pas">
             <Form>CadM</Form>
             <FormType>dfm</FormType>
@@ -127,6 +125,14 @@
             <Form>FrmPessoas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="CadServicos.pas">
+            <Form>FrmServicos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Controllers\PessoasController.pas"/>
+        <DCCReference Include="Controllers\PessoasTipoController.pas"/>
+        <DCCReference Include="Controllers\ServicosController.pas"/>
+        <DCCReference Include="Controllers\ServicosTipoController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

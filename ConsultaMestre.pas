@@ -26,7 +26,7 @@ uses
   dxScrollbarAnnotations, Data.DB, cxDBData, cxGridLevel, cxClasses,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, dxLayoutControl, dxLayoutControlAdapters, Vcl.Menus, Vcl.StdCtrls,
-  cxButtons, XData.Web.Connection, XData.Web.Client, PessoasService,
+  cxButtons, XData.Web.Connection, XData.Web.Client,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, PessoaModel, Generics.Collections,
@@ -47,8 +47,9 @@ type
     MemTable: TFDMemTable;
     DSGrid: TDataSource;
     cxGrid1DBTableView1: TcxGridDBTableView;
-    cxGrid1DBTableView1Column1: TcxGridDBColumn;
-    cxGrid1DBTableView1Column2: TcxGridDBColumn;
+    columnId: TcxGridDBColumn;
+    columnDtModificacao: TcxGridDBColumn;
+    columnDtCriacao: TcxGridDBColumn;
     procedure cxGrid1DBTableView1DblClick(Sender: TObject);
   private
     procedure PopularMemTable(list: TList<TObject>; memTable: TFDMemTable);

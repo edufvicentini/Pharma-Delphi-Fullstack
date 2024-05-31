@@ -20,8 +20,6 @@ object ConsM: TConsM
     Height = 478
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 616
-    ExplicitHeight = 439
     object cxGrid1: TcxGrid
       Left = 12
       Top = 12
@@ -37,17 +35,20 @@ object ConsM: TConsM
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         OptionsSelection.CellSelect = False
+        OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
-        object cxGrid1DBTableView1Column1: TcxGridDBColumn
+        object columnId: TcxGridDBColumn
           DataBinding.FieldName = 'id'
           DataBinding.IsNullValueType = True
         end
-        object cxGrid1DBTableView1Column2: TcxGridDBColumn
-          Caption = 'servico'
-          DataBinding.FieldName = 'descricao'
-          DataBinding.IsNullValueType = True
-          Options.AutoWidthSizable = False
-          Width = 177
+        object columnDtModificacao: TcxGridDBColumn
+          Caption = 'Modificado em'
+          DataBinding.FieldName = 'updated_at'
+          Width = 108
+        end
+        object columnDtCriacao: TcxGridDBColumn
+          Caption = 'Criado em'
+          DataBinding.FieldName = 'created_at'
         end
       end
       object cxGrid1Level1: TcxGridLevel
@@ -122,15 +123,19 @@ object ConsM: TConsM
     end
   end
   object MemTable: TFDMemTable
+    FieldOptions.AutoCreateMode = acCombineAlways
     FieldDefs = <
       item
         Name = 'id'
         DataType = ftInteger
       end
       item
-        Name = 'descricao'
-        DataType = ftString
-        Size = 100
+        Name = 'created_at'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'updated_at'
+        DataType = ftDateTime
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]

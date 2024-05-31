@@ -47,19 +47,19 @@ type
   TAtendimentoTableDictionary = class
   private
     Fid: TDictionaryAttribute;
-    Fcreated_at: TDictionaryAttribute;
-    Fupdated_at: TDictionaryAttribute;
     Fobservacao: TDictionaryAttribute;
     Fvalor_total: TDictionaryAttribute;
+    Fcreated_at: TDictionaryAttribute;
+    Fupdated_at: TDictionaryAttribute;
     FResponsavel: TDictionaryAssociation;
     FPaciente: TDictionaryAssociation;
   public
     constructor Create;
     property id: TDictionaryAttribute read Fid;
-    property created_at: TDictionaryAttribute read Fcreated_at;
-    property updated_at: TDictionaryAttribute read Fupdated_at;
     property observacao: TDictionaryAttribute read Fobservacao;
     property valor_total: TDictionaryAttribute read Fvalor_total;
+    property created_at: TDictionaryAttribute read Fcreated_at;
+    property updated_at: TDictionaryAttribute read Fupdated_at;
     property Responsavel: TDictionaryAssociation read FResponsavel;
     property Paciente: TDictionaryAssociation read FPaciente;
   end;
@@ -86,20 +86,28 @@ type
   private
     Fid: TDictionaryAttribute;
     Fdescricao: TDictionaryAttribute;
+    Fcreated_at: TDictionaryAttribute;
+    Fupdated_at: TDictionaryAttribute;
   public
     constructor Create;
     property id: TDictionaryAttribute read Fid;
     property descricao: TDictionaryAttribute read Fdescricao;
+    property created_at: TDictionaryAttribute read Fcreated_at;
+    property updated_at: TDictionaryAttribute read Fupdated_at;
   end;
   
   TAtendimentoServicoTableDictionary = class
   private
     Fid: TDictionaryAttribute;
+    Fcreated_at: TDictionaryAttribute;
+    Fupdated_at: TDictionaryAttribute;
     FAtendimento: TDictionaryAssociation;
     FServico: TDictionaryAssociation;
   public
     constructor Create;
     property id: TDictionaryAttribute read Fid;
+    property created_at: TDictionaryAttribute read Fcreated_at;
+    property updated_at: TDictionaryAttribute read Fupdated_at;
     property Atendimento: TDictionaryAssociation read FAtendimento;
     property Servico: TDictionaryAssociation read FServico;
   end;
@@ -204,10 +212,10 @@ constructor TAtendimentoTableDictionary.Create;
 begin
   inherited;
   Fid := TDictionaryAttribute.Create('id');
-  Fcreated_at := TDictionaryAttribute.Create('created_at');
-  Fupdated_at := TDictionaryAttribute.Create('updated_at');
   Fobservacao := TDictionaryAttribute.Create('observacao');
   Fvalor_total := TDictionaryAttribute.Create('valor_total');
+  Fcreated_at := TDictionaryAttribute.Create('created_at');
+  Fupdated_at := TDictionaryAttribute.Create('updated_at');
   FResponsavel := TDictionaryAssociation.Create('Responsavel');
   FPaciente := TDictionaryAssociation.Create('Paciente');
 end;
@@ -232,6 +240,8 @@ begin
   inherited;
   Fid := TDictionaryAttribute.Create('id');
   Fdescricao := TDictionaryAttribute.Create('descricao');
+  Fcreated_at := TDictionaryAttribute.Create('created_at');
+  Fupdated_at := TDictionaryAttribute.Create('updated_at');
 end;
 
 { TAtendimentoServicoTableDictionary }
@@ -240,6 +250,8 @@ constructor TAtendimentoServicoTableDictionary.Create;
 begin
   inherited;
   Fid := TDictionaryAttribute.Create('id');
+  Fcreated_at := TDictionaryAttribute.Create('created_at');
+  Fupdated_at := TDictionaryAttribute.Create('updated_at');
   FAtendimento := TDictionaryAssociation.Create('Atendimento');
   FServico := TDictionaryAssociation.Create('Servico');
 end;
