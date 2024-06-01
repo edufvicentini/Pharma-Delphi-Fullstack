@@ -19,7 +19,7 @@
 ## 🚀 Como Rodar o Projeto
 
 ### Pré-requisito
-- [MySQL](https://git-scm.com) (Localhost na porta 3306)
+- MySQL (Localhost na porta 3306)
 
 ### Configurando o Banco de Dados
 Rodar o arquivo SQL_Banco disponível na pasta raiz do projeto. O arquivo já criará o banco MySQL com as devidas tabelas.
