@@ -31,6 +31,16 @@ Rodar o arquivo SQL_Banco disponível na pasta raiz do projeto. O arquivo já cr
 ### Frontend
 <p>Execute o arquivo Pharma.exe ou compile pelo Delphi.</p>
 
+## Possíveis Melhorias
+Com maior tempo de projeto, algumas melhorias poderiam acontecer.
+### Relatórios e Impressões 
+Integrando o FastReport é possivel realizar de forma facil a impressão das informacoes.
+### DTO para transferência de objetos
+Esta seria mais questão estrutural.
+### Classes responsáveis por serialização e desserialização das entidades
+Hoje toda a lógica está na tela, o que não é o ideal
+### Entre outras possíveis melhorias
+
 ## Autor
 
 <a href="https://https://www.linkedin.com/in/eduardofvicentini">
