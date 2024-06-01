@@ -59,6 +59,7 @@ end;
 
 function TAtendimentosController.Delete(data: TAtendimento): Boolean;
 begin
+  xDataClient.Service<IAtendimentosServiceContract>.DeleteAtendimento(data);
   xDataClient.Delete(data);
   result := True;
 end;

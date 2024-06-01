@@ -14,6 +14,7 @@ type
     [HttpGet] function FindAllServices(codigo: integer): TList<TAtendimentoServico>;
     [HttpPost] function SaveAtendimento(atendimento: TAtendimento; atendimentoServicos: TList<TAtendimentoServico>): TAtendimento;
     [HttpPut] function EditAtendimento(atendimento: TAtendimento; atendimentoServicos: TList<TAtendimentoServico>): TAtendimento;
+    [HttpDelete] procedure DeleteAtendimento(atendimento: TAtendimento);
   end;
 
 implementation

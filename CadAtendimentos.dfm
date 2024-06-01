@@ -45,26 +45,31 @@ inherited FrmAtendimentos: TFrmAtendimentos
         OptionsView.GroupByBox = False
         object gridProdutosColumn1: TcxGridDBColumn
           DataBinding.FieldName = 'id'
+          DataBinding.IsNullValueType = True
           Visible = False
         end
         object gridProdutosColumn2: TcxGridDBColumn
           Caption = 'Cod. Servi'#231'o'
           DataBinding.FieldName = 'servico'
+          DataBinding.IsNullValueType = True
           Width = 74
         end
         object gridProdutosColumn4: TcxGridDBColumn
           Caption = 'Servi'#231'o'
           DataBinding.FieldName = 'servicoDescricao'
+          DataBinding.IsNullValueType = True
           Width = 128
         end
         object gridProdutosColumn3: TcxGridDBColumn
           Caption = 'Valor'
           DataBinding.FieldName = 'valor'
+          DataBinding.IsNullValueType = True
           Width = 119
         end
         object gridProdutosColumn5: TcxGridDBColumn
           Caption = 'Tipo'
           DataBinding.FieldName = 'servicoTipo'
+          DataBinding.IsNullValueType = True
           Width = 198
         end
       end

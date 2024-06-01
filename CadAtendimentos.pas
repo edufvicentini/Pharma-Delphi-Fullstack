@@ -86,6 +86,7 @@ type
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnRemoverServicoClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     FPessoasController : TPessoasController;
     FServicosController : TServicosController;
@@ -192,6 +193,17 @@ begin
   finally
     updateGUI;
   end;
+end;
+
+procedure TFrmAtendimentos.btnExcluirClick(Sender: TObject);
+var
+  atendimento: TAtendimento;
+begin
+  inherited;
+  atendimento := AtendimentoMemTableParaObjeto;
+  FAtendimentosController.Delete(atendimento);
+  CadastroMemTable.Close;
+  clearMemTable;
 end;
 
 procedure TFrmAtendimentos.btnNovoClick(Sender: TObject);

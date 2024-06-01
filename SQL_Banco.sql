@@ -1,3 +1,6 @@
+CREATE SCHEMA `banco` ;
+USE `banco`;
+
 CREATE TABLE atendimentos_servicos (
   id INT AUTO_INCREMENT NOT NULL,
   atendimento INT NOT NULL,

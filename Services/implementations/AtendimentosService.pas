@@ -18,6 +18,7 @@ type
     function FindAllServices(codigo: integer): TList<TAtendimentoServico>;
     function SaveAtendimento(atendimento: TAtendimento; atendimentoServicos: TList<TAtendimentoServico>): TAtendimento;
     function EditAtendimento(atendimento: TAtendimento; atendimentoServicos: TList<TAtendimentoServico>): TAtendimento;
+    procedure DeleteAtendimento(atendimento: TAtendimento);
     procedure ValidarEntity(atendimento: TAtendimento);
   end;
 
@@ -97,6 +98,21 @@ end;
 function TAtendimentosService.FindAllServices(codigo: integer): TList<TAtendimentoServico>;
 begin
   result := TXDataOperationContext.Current.GetManager.Find<TAtendimentoServico>.Where(TLinq.Eq('atendimento', codigo)).List;
+end;
+
+procedure TAtendimentosService.DeleteAtendimento(atendimento: TAtendimento);
+var
+  atendimentoServicos: TList<TAtendimentoServico>;
+  atendimentoServico: TAtendimentoServico;
+  I: integer;
+begin
+  atendimentoServicos := FindAllServices(atendimento.id);
+
+  for I := 0 to atendimentoServicos.count - 1 do
+    TXDataOperationContext.Current.GetManager.Remove(atendimentoServicos[I]);
+
+  TXDataOperationContext.Current.GetManager.Flush;
+  //TXDataOperationContext.Current.GetManager.Remove(atendimento);
 end;
 
 procedure TAtendimentosService.ValidarEntity(atendimento: TAtendimento);
