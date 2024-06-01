@@ -18,7 +18,13 @@ uses
   PessoasTipoController in 'Controllers\PessoasTipoController.pas',
   ServicosController in 'Controllers\ServicosController.pas',
   ServicosTipoController in 'Controllers\ServicosTipoController.pas',
-  ConsultaServicos in 'ConsultaServicos.pas' {ConServicos};
+  ConsultaServicos in 'ConsultaServicos.pas' {ConServicos},
+  CadAtendimentos in 'CadAtendimentos.pas' {FrmAtendimentos},
+  ConsultaAtendimentos in 'ConsultaAtendimentos.pas' {ConAtendimentos},
+  AtendimentosController in 'Controllers\AtendimentosController.pas',
+  IAtendimentosService in 'Services\interfaces\IAtendimentosService.pas',
+  IPessoaService in 'Services\interfaces\IPessoaService.pas',
+  IServicoService in 'Services\interfaces\IServicoService.pas';
 
 {$R *.res}
 
@@ -26,6 +32,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TPrincipal, Principal);
-  Application.CreateForm(TConServicos, ConServicos);
   Application.Run;
 end.

@@ -18,14 +18,17 @@ type
   
   [Entity]
   [Table('atendimentos_servicos')]
-  [Id('Fid', TIdGenerator.None)]
+  [Id('Fid', TIdGenerator.IdentityOrSequence)]
   TAtendimentoServico = class
   private
-    [Column('id', [TColumnProp.Required])]
+    [Column('id', [TColumnProp.Required, TColumnProp.NoInsert, TColumnProp.NoUpdate])]
     Fid: Integer;
     
-    [Column('created_at', [])]
-    Fcreated_at: Nullable<TDateTime>;
+    [Column('valor', [TColumnProp.Required], 50)]
+    Fvalor: Double;
+    
+    [Column('created_at', [TColumnProp.Required])]
+    Fcreated_at: TDateTime;
     
     [Column('updated_at', [TColumnProp.Required])]
     Fupdated_at: TDateTime;
@@ -43,7 +46,8 @@ type
     procedure SetServico(const Value: TServico);
   public
     property id: Integer read Fid write Fid;
-    property created_at: Nullable<TDateTime> read Fcreated_at write Fcreated_at;
+    property valor: Double read Fvalor write Fvalor;
+    property created_at: TDateTime read Fcreated_at write Fcreated_at;
     property updated_at: TDateTime read Fupdated_at write Fupdated_at;
     property Atendimento: TAtendimento read GetAtendimento write SetAtendimento;
     property Servico: TServico read GetServico write SetServico;

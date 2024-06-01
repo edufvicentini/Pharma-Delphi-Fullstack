@@ -26,6 +26,7 @@
       Width = 612
       Height = 413
       Align = alNone
+      OptionsBehavior.ItemMoving = False
       OptionsView.CenterContentHorz = True
       OptionsView.CenterContentVert = True
       OptionsView.IndentHorz = 0
@@ -74,6 +75,7 @@
         Text2.AssignedValues = []
         Text3.AssignedValues = []
         Text4.AssignedValues = []
+        OnClick = btnAtendimentosClick
       end
       object btnServiços: TdxTileControlItem
         GroupIndex = 0
@@ -112,6 +114,7 @@
         Text2.AssignedValues = []
         Text3.AssignedValues = []
         Text4.AssignedValues = []
+        OnClick = btnSobreClick
       end
       object btnSair: TdxTileControlItem
         GroupIndex = 1

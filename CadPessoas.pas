@@ -35,12 +35,12 @@ type
   TFrmPessoas = class(TCadM)
     dxLayoutItem13: TdxLayoutItem;
     edtNome: TcxDBTextEdit;
-    liedtCPF: TdxLayoutItem;
-    edtCPF: TcxDBTextEdit;
     MemTableLookup: TFDMemTable;
     DSLookup: TDataSource;
     DBLookupComboBox1: TDBLookupComboBox;
     cbxLookupTipoPessoa: TdxLayoutItem;
+    dxLayoutItem14: TdxLayoutItem;
+    edtCPF: TcxDBTextEdit;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -95,29 +95,25 @@ var
   pessoa: TPessoa;
   pessoaTipo: TPessoaTipo;
   isEditando: Boolean;
-  modified: boolean;
 begin
-  inherited;
   if (CadastroMemTable.State = TDatasetState.dsEdit) then
     isEditando := True;
+  inherited;
 
-  //CadastroMemTable.Post;
   pessoa := PessoasMemTableParaObjeto;
   try
     if isEditando then
-      modified := FPessoasController.Edit(pessoa)
+      pessoa := FPessoasController.Edit(pessoa)
     else
-      modified := FPessoasController.CreateNew(pessoa);
+      pessoa := FPessoasController.CreateNew(pessoa);
 
-    ShowMessage('Cadastro Alterado')
+    PessoasObjetoParaMemTable(pessoa);
   except
     on E:Exception do
     begin
-      modified := False;
       ShowMessage(E.Message);
     end;
   end;
-
 end;
 
 procedure TFrmPessoas.btnConsultarClick(Sender: TObject);
@@ -145,7 +141,6 @@ begin
   pessoa := PessoasMemTableParaObjeto;
   FPessoasController.Delete(pessoa);
   CadastroMemTable.Close;
-  ShowMessage('Excluiu');
 end;
 
 procedure TFrmPessoas.PessoasObjetoParaMemTable(pessoa: TPessoa);

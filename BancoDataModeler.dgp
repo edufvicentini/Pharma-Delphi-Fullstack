@@ -22,7 +22,7 @@ object AppMetaData: TAppMetaData
     end>
   DataDictionary.DatabaseTypeID = 'mysql57'
   DataDictionary.NextTableID = 9
-  DataDictionary.NextFieldID = 61
+  DataDictionary.NextFieldID = 66
   DataDictionary.NextConstraintID = 1
   DataDictionary.NextIndexID = 1
   DataDictionary.NextRelationshipID = 16
@@ -193,20 +193,6 @@ object AppMetaData: TAppMetaData
           GeneratedByRelationship = False
         end
         item
-          FieldName = 'tipo'
-          DataTypeName = 'Int'
-          Size = 0
-          Size2 = 0
-          Required = True
-          FID = 24
-          DefaultValueSpecific = False
-          RequiredSpecific = False
-          ConstraintExprSpecific = False
-          SeedValue = 0
-          IncrementValue = 1
-          GeneratedByRelationship = True
-        end
-        item
           FieldName = 'created_at'
           DataTypeName = 'TimeStamp'
           Size = 0
@@ -233,6 +219,20 @@ object AppMetaData: TAppMetaData
           SeedValue = 0
           IncrementValue = 1
           GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'tipo'
+          DataTypeName = 'Int'
+          Size = 0
+          Size2 = 0
+          Required = True
+          FID = 62
+          DefaultValueSpecific = False
+          RequiredSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = True
         end>
       Indexes = <>
       Constraints = <>
@@ -330,7 +330,7 @@ object AppMetaData: TAppMetaData
       Fields = <
         item
           FieldName = 'id'
-          DataTypeName = 'Int'
+          DataTypeName = 'Int (autoincrement)'
           Size = 0
           Size2 = 0
           Required = True
@@ -371,11 +371,25 @@ object AppMetaData: TAppMetaData
           GeneratedByRelationship = True
         end
         item
+          FieldName = 'valor'
+          DataTypeName = 'Float'
+          Size = 50
+          Size2 = 0
+          Required = True
+          FID = 61
+          DefaultValueSpecific = False
+          RequiredSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
           FieldName = 'created_at'
           DataTypeName = 'DateTime'
           Size = 0
           Size2 = 0
-          Required = False
+          Required = True
           FID = 59
           DefaultValueSpecific = False
           RequiredSpecific = False
@@ -821,9 +835,9 @@ object AppMetaData: TAppMetaData
         '    AnchorIndex = 0'#13#10'        Collapsable = False'#13#10'        Collap' +
         'sed = False'#13#10'        LinkConstraint = lcAll'#13#10'        Visible = T' +
         'rue'#13#10'      end>'#13#10'    RelID = 8'#13#10'  end'#13#10'  object TableDiagramBloc' +
-        'k4: TTableDiagramBlock'#13#10'    Left = 457.000000000000000000'#13#10'    T' +
-        'op = 168.000000000000000000'#13#10'    Width = 139.000000000000000000'#13 +
-        #10'    Height = 114.000000000000000000'#13#10'    CornerRadius = 25.0000' +
+        'k4: TTableDiagramBlock'#13#10'    Left = 456.000000000000000000'#13#10'    T' +
+        'op = 159.000000000000000000'#13#10'    Width = 139.000000000000000000'#13 +
+        #10'    Height = 132.000000000000000000'#13#10'    CornerRadius = 25.0000' +
         '00000000000000'#13#10'    Collapsed = False'#13#10'    TID = 5'#13#10'  end'#13#10'  obj' +
         'ect RelationshipDiagramLine2: TRelationshipDiagramLine'#13#10'    Pen.' +
         'Style = psDot'#13#10'    SourceArrow.Shape = asNone'#13#10'    SourceArrow.W' +
@@ -842,8 +856,8 @@ object AppMetaData: TAppMetaData
         'ellFrame.AutoFrameMargin = 0'#13#10'        CellFrame.Visible = True'#13#10 +
         '        Visible = True'#13#10'        ReadOnly = False'#13#10'        Transp' +
         'arency = 0'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = True'#13 +
-        #10'        Left = 18.623505318415600000'#13#10'        Top = 234.2086081' +
-        '73408300000'#13#10'        Width = 400.000000000000000000'#13#10'        Hei' +
+        #10'        Left = 17.616300442075500000'#13#10'        Top = 234.1926488' +
+        '20240500000'#13#10'        Width = 400.000000000000000000'#13#10'        Hei' +
         'ght = 100.000000000000000000'#13#10'        Clip = False'#13#10'        Word' +
         'Wrap = True'#13#10'        DControlFont = True'#13#10'        Alignment = ta' +
         'RightJustify'#13#10'        VertAlign = vaTop'#13#10'        RotateFont = Tr' +
@@ -852,8 +866,8 @@ object AppMetaData: TAppMetaData
         'ame.AutoFrameMargin = 0'#13#10'        CellFrame.Visible = False'#13#10'    ' +
         '    Visible = True'#13#10'        ReadOnly = False'#13#10'        Transparen' +
         'cy = 0'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'   ' +
-        '     Left = 407.592783347677300000'#13#10'        Top = 233.7760308412' +
-        '22500000'#13#10'        Width = 400.000000000000100000'#13#10'        Height' +
+        '     Left = 407.584338790947100000'#13#10'        Top = 233.7913703541' +
+        '95300000'#13#10'        Width = 400.000000000000000000'#13#10'        Height' +
         ' = 100.000000000000000000'#13#10'        Clip = False'#13#10'        WordWra' +
         'p = True'#13#10'        DControlFont = True'#13#10'        Alignment = taLef' +
         'tJustify'#13#10'        VertAlign = vaTop'#13#10'        RotateFont = True'#13#10 +
@@ -862,7 +876,7 @@ object AppMetaData: TAppMetaData
         'AutoFrameMargin = 0'#13#10'        CellFrame.Visible = False'#13#10'        ' +
         'Visible = True'#13#10'        ReadOnly = False'#13#10'        Transparency =' +
         ' 0'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'       ' +
-        ' Left = 19.407216652322690000'#13#10'        Top = 114.223969158777500' +
+        ' Left = 18.415661209052930000'#13#10'        Top = 114.208629645804700' +
         '000'#13#10'        Width = 400.000000000000000000'#13#10'        Height = 10' +
         '0.000000000000000000'#13#10'        Clip = False'#13#10'        WordWrap = T' +
         'rue'#13#10'        DControlFont = True'#13#10'        Alignment = taRightJus' +
@@ -872,7 +886,7 @@ object AppMetaData: TAppMetaData
         'utoFrameMargin = 0'#13#10'        CellFrame.Visible = False'#13#10'        V' +
         'isible = True'#13#10'        ReadOnly = False'#13#10'        Transparency = ' +
         '0'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'        ' +
-        'Left = 408.376494681584400000'#13#10'        Top = 113.791391826591700' +
+        'Left = 408.383699557924500000'#13#10'        Top = 113.807351179759500' +
         '000'#13#10'        Width = 400.000000000000000000'#13#10'        Height = 10' +
         '0.000000000000000000'#13#10'        Clip = False'#13#10'        WordWrap = T' +
         'rue'#13#10'        DControlFont = True'#13#10'        Alignment = taLeftJust' +
@@ -883,7 +897,7 @@ object AppMetaData: TAppMetaData
         'sible = True'#13#10'        ReadOnly = False'#13#10'        Transparency = 0' +
         #13#10'      end>'#13#10'    Visible = True'#13#10'    Layer = 0'#13#10'    Transparenc' +
         'y = 0'#13#10'    LineStyle = lsLine'#13#10'    Color = clBlack'#13#10'    Collapse' +
-        'd = False'#13#10'    Handles = <'#13#10'      item'#13#10'        OrX = 439.000000' +
+        'd = False'#13#10'    Handles = <'#13#10'      item'#13#10'        OrX = 438.000000' +
         '000000000000'#13#10'        OrY = 225.000000000000000000'#13#10'        Styl' +
         'e = hsSize'#13#10'      end'#13#10'      item'#13#10'        OrX = 388.00000000000' +
         '0000000'#13#10'        OrY = 223.000000000000000000'#13#10'        Style = h' +
@@ -911,7 +925,7 @@ object AppMetaData: TAppMetaData
         '   CellFrame.AutoFrame = True'#13#10'        CellFrame.AutoFrameMargin' +
         ' = 0'#13#10'        CellFrame.Visible = True'#13#10'        Visible = True'#13#10 +
         '        ReadOnly = False'#13#10'        Transparency = 0'#13#10'      end'#13#10' ' +
-        '     item'#13#10'        DControlAngle = True'#13#10'        Left = 634.0000' +
+        '     item'#13#10'        DControlAngle = True'#13#10'        Left = 633.0000' +
         '00000000000000'#13#10'        Top = 115.000000000000000000'#13#10'        Wi' +
         'dth = 400.000000000000000000'#13#10'        Height = 100.0000000000000' +
         '00000'#13#10'        Clip = False'#13#10'        WordWrap = True'#13#10'        DC' +
@@ -931,7 +945,7 @@ object AppMetaData: TAppMetaData
         'CellFrame.AutoFrame = False'#13#10'        CellFrame.AutoFrameMargin =' +
         ' 0'#13#10'        CellFrame.Visible = False'#13#10'        Visible = True'#13#10' ' +
         '       ReadOnly = False'#13#10'        Transparency = 0'#13#10'      end'#13#10'  ' +
-        '    item'#13#10'        DControlAngle = True'#13#10'        Left = 634.00000' +
+        '    item'#13#10'        DControlAngle = True'#13#10'        Left = 633.00000' +
         '0000000000000'#13#10'        Top = 235.000000000000000000'#13#10'        Wid' +
         'th = 400.000000000000000000'#13#10'        Height = 100.00000000000000' +
         '0000'#13#10'        Clip = False'#13#10'        WordWrap = True'#13#10'        DCo' +
@@ -953,7 +967,7 @@ object AppMetaData: TAppMetaData
         'ReadOnly = False'#13#10'        Transparency = 0'#13#10'      end>'#13#10'    Visi' +
         'ble = True'#13#10'    Layer = 0'#13#10'    Transparency = 0'#13#10'    LineStyle =' +
         ' lsLine'#13#10'    Color = clBlack'#13#10'    Collapsed = False'#13#10'    Handles' +
-        ' = <'#13#10'      item'#13#10'        OrX = 614.000000000000000000'#13#10'        ' +
+        ' = <'#13#10'      item'#13#10'        OrX = 613.000000000000000000'#13#10'        ' +
         'OrY = 225.000000000000000000'#13#10'        Style = hsSize'#13#10'      end'#13 +
         #10'      item'#13#10'        OrX = 655.000000000000000000'#13#10'        OrY =' +
         ' 225.000000000000000000'#13#10'        Style = hsSize'#13#10'      end>'#13#10'   ' +

@@ -9,7 +9,13 @@ uses
   PessoaModel in '..\Models\PessoaModel.pas',
   PessoaTipoModel in '..\Models\PessoaTipoModel.pas',
   ServicoModel in '..\Models\ServicoModel.pas',
-  ServicoTipoModel in '..\Models\ServicoTipoModel.pas';
+  ServicoTipoModel in '..\Models\ServicoTipoModel.pas',
+  IAtendimentosService in '..\Services\interfaces\IAtendimentosService.pas',
+  AtendimentosService in '..\Services\implementations\AtendimentosService.pas',
+  PessoaService in '..\Services\implementations\PessoaService.pas',
+  IPessoaService in '..\Services\interfaces\IPessoaService.pas',
+  IServicoService in '..\Services\interfaces\IServicoService.pas',
+  ServicoService in '..\Services\implementations\ServicoService.pas';
 
 {$R *.res}
 

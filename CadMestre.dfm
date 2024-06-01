@@ -59,6 +59,7 @@ object CadM: TCadM
       Width = 75
       Height = 25
       Caption = 'Editar'
+      Enabled = False
       TabOrder = 4
       OnClick = btnEditarClick
     end
@@ -68,6 +69,7 @@ object CadM: TCadM
       Width = 75
       Height = 25
       Caption = 'Excluir'
+      Enabled = False
       TabOrder = 5
       OnClick = btnExcluirClick
     end
@@ -106,6 +108,7 @@ object CadM: TCadM
       Properties.ReadOnly = True
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
+      Style.Color = clScrollBar
       Style.HotTrack = False
       Style.TransparentBorder = False
       TabOrder = 6
@@ -116,8 +119,10 @@ object CadM: TCadM
       Top = 445
       DataBinding.DataField = 'created_at'
       DataBinding.DataSource = DSCadastro
+      Properties.ReadOnly = True
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
+      Style.Color = clScrollBar
       Style.HotTrack = False
       Style.TransparentBorder = False
       Style.ButtonStyle = bts3D
@@ -130,8 +135,10 @@ object CadM: TCadM
       Top = 445
       DataBinding.DataField = 'updated_at'
       DataBinding.DataSource = DSCadastro
+      Properties.ReadOnly = True
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
+      Style.Color = clScrollBar
       Style.HotTrack = False
       Style.TransparentBorder = False
       Style.ButtonStyle = bts3D
@@ -220,6 +227,7 @@ object CadM: TCadM
       ControlOptions.OriginalHeight = 25
       ControlOptions.OriginalWidth = 75
       ControlOptions.ShowBorder = False
+      Enabled = False
       Index = 3
     end
     object dxLayoutItem5: TdxLayoutItem
@@ -229,6 +237,7 @@ object CadM: TCadM
       ControlOptions.OriginalHeight = 25
       ControlOptions.OriginalWidth = 75
       ControlOptions.ShowBorder = False
+      Enabled = False
       Index = 4
     end
     object dxLayoutItem6: TdxLayoutItem

@@ -36,10 +36,13 @@ type
     columnNome: TcxGridDBColumn;
     columnTipo: TcxGridDBColumn;
     columnCPF: TcxGridDBColumn;
+    cxGrid1DBTableView1Column1: TcxGridDBColumn;
   private
     procedure PopularMemTable(list: TList<TObject>; memTable: TFDMemTable);
   public
     class function Consultar(parent: TForm): Integer;
+    class function ConsultarFarmaceuticos(parent: TForm): Integer;
+    class function ConsultarPacientes(parent: TForm): Integer;
   end;
 
 var
@@ -86,11 +89,59 @@ begin
     memTable.Insert;
     memTable.FieldByName('id').AsInteger := pessoa.id;
     memTable.FieldByName('nome').AsString := pessoa.nome;
-//    memTable.FieldByName('codigoCpf').AsString := pessoa.cpf;
+    memTable.FieldByName('cpf').AsString := pessoa.cpf;
     memTable.FieldByName('tipo').AsString := pessoa.tipo.descricao;
     memTable.FieldByName('created_at').AsDateTime := pessoa.tipo.created_at;
     memTable.FieldByName('updated_at').AsDateTime := pessoa.tipo.updated_at;
     memTable.Post;
+  end;
+end;
+
+class function TConPessoas.ConsultarFarmaceuticos(parent: TForm): Integer;
+var
+  consulta: TConPessoas;
+  controller: TPessoasController;
+  pessoas: TList<TPessoa>;
+  pessoa: TPessoa;
+  i: integer;
+begin
+  consulta := TConPessoas.Create(parent);
+  controller := TPessoasController.Create(parent);
+  try
+    pessoas := controller.ListAllFarmaceuticos;
+    consulta.PopularMemTable(TList<TObject>(pessoas), consulta.MemTable);
+
+    if (consulta.ShowModal = mrOk) then
+      result := consulta.MemTable.FieldByName('id').AsInteger
+    else
+      result := 0
+  finally
+    controller.Destroy;
+    consulta.Free;
+  end;
+end;
+
+ class function TConPessoas.ConsultarPacientes(parent: TForm): Integer;
+var
+  consulta: TConPessoas;
+  controller: TPessoasController;
+  pessoas: TList<TPessoa>;
+  pessoa: TPessoa;
+  i: integer;
+begin
+  consulta := TConPessoas.Create(parent);
+  controller := TPessoasController.Create(parent);
+  try
+    pessoas := controller.ListAllPacientes;
+    consulta.PopularMemTable(TList<TObject>(pessoas), consulta.MemTable);
+
+    if (consulta.ShowModal = mrOk) then
+      result := consulta.MemTable.FieldByName('id').AsInteger
+    else
+      result := 0
+  finally
+    controller.Destroy;
+    consulta.Free;
   end;
 end;
 

@@ -49,8 +49,8 @@ type
   private
     FServicosController : TServicosController;
     FServicosTipoController : TServicosTipoController;
-    procedure PessoasObjetoParaMemTable(servico: TServico);
-    function PessoasMemTableParaObjeto: TServico;
+    procedure ServicosObjetoParaMemTable(servico: TServico);
+    function ServicosMemTableParaObjeto: TServico;
     procedure CarregaLookup;
     procedure updateGUI;
   end;
@@ -61,6 +61,14 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFrmServicos.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FServicosController := TServicosController.Create(self);
+  FServicosTipoController := TServicosTipoController.Create(self);
+  CarregaLookup;
+end;
 
 procedure TFrmServicos.CarregaLookup;
 var
@@ -80,31 +88,25 @@ begin
   end;
 end;
 
-
 procedure TFrmServicos.btnConfirmarClick(Sender: TObject);
 var
   servico: TServico;
-  servicoTipo: TServicoTipo;
   isEditando: Boolean;
-  modified: boolean;
 begin
-  inherited;
   if (CadastroMemTable.State = TDatasetState.dsEdit) then
     isEditando := True;
+  inherited;
 
-  //CadastroMemTable.Post;
-  servico := PessoasMemTableParaObjeto;
+  servico := ServicosMemTableParaObjeto;
   try
     if isEditando then
-      modified := FServicosController.Edit(servico)
+      servico := FServicosController.Edit(servico)
     else
-      modified := FServicosController.CreateNew(servico);
-
-    ShowMessage('Cadastro Alterado')
+      servico := FServicosController.CreateNew(servico);
+    ServicosObjetoParaMemTable(servico);
   except
     on E:Exception do
     begin
-      modified := False;
       ShowMessage(E.Message);
     end;
   end;
@@ -120,7 +122,7 @@ begin
     if (codigo <> 0) then
     begin
       servico := FServicosController.Find(codigo);
-      PessoasObjetoParaMemTable(servico);
+      ServicosObjetoParaMemTable(servico);
     end;
   finally
     updateGUI;
@@ -133,13 +135,12 @@ var
   servico: TServico;
 begin
   inherited;
-  servico := PessoasMemTableParaObjeto;
+  servico := ServicosMemTableParaObjeto;
   FServicosController.Delete(servico);
   CadastroMemTable.Close;
-  ShowMessage('Excluiu');
 end;
 
-procedure TFrmServicos.PessoasObjetoParaMemTable(servico: TServico);
+procedure TFrmServicos.ServicosObjetoParaMemTable(servico: TServico);
 begin
   CadastroMemTable.Close;
   CadastroMemTable.Open;
@@ -154,7 +155,7 @@ begin
   CadastroMemTable.Post;
 end;
 
-function TFrmServicos.PessoasMemTableParaObjeto: TServico;
+function TFrmServicos.ServicosMemTableParaObjeto: TServico;
 var
   servico: TServico;
   servicoTipo: TServicoTipo;
@@ -181,15 +182,6 @@ procedure TFrmServicos.updateGUI;
 begin
   inherited;
 end;
-
-procedure TFrmServicos.FormCreate(Sender: TObject);
-begin
-  inherited;
-  FServicosController := TServicosController.Create(self);
-  FServicosTipoController := TServicosTipoController.Create(self);
-  CarregaLookup;
-end;
-
 
 procedure TFrmServicos.FormDestroy(Sender: TObject);
 begin

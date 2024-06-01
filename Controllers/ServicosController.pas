@@ -2,7 +2,7 @@ unit ServicosController;
 
 interface
 uses XData.Web.Connection, XData.Web.Client, XData.Client, Generics.Collections,
-PessoaModel, ServicoModel, System.Classes, System.SysUtils;
+PessoaModel, ServicoModel, System.Classes, System.SysUtils, IServicoService;
 
 type
   TServicosController = class
@@ -13,8 +13,8 @@ type
   public
     FResponse: TXDataClientResponse;
     function Index: TList<TServico>;
-    function CreateNew(data: TServico): Boolean;
-    function Edit(data: TServico): Boolean;
+    function CreateNew(data: TServico): TServico;
+    function Edit(data: TServico): TServico;
     function Find(Id: integer): TServico;
     function Delete(data: TServico): Boolean;
   end;
@@ -44,16 +44,14 @@ begin
   end;
 end;
 
-function TServicosController.CreateNew(data: TServico): Boolean;
+function TServicosController.CreateNew(data: TServico): TServico;
 begin
-  xDataClient.Post(data);
-  result := True;
+  result := xDataClient.Service<IServicosService>.Create(data);
 end;
 
-function TServicosController.Edit(data: TServico): Boolean;
+function TServicosController.Edit(data: TServico): TServico;
 begin
-  xDataClient.Put(data);
-  result := True;
+  result := xDataClient.Service<IServicosService>.Update(data);
 end;
 
 function TServicosController.Delete(data: TServico): Boolean;

@@ -137,6 +137,18 @@
             <Form>ConServicos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="CadAtendimentos.pas">
+            <Form>FrmAtendimentos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ConsultaAtendimentos.pas">
+            <Form>ConAtendimentos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Controllers\AtendimentosController.pas"/>
+        <DCCReference Include="Services\interfaces\IAtendimentosService.pas"/>
+        <DCCReference Include="Services\interfaces\IPessoaService.pas"/>
+        <DCCReference Include="Services\interfaces\IServicoService.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

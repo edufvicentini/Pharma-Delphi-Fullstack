@@ -7,19 +7,11 @@ inherited FrmPessoas: TFrmPessoas
     inherited cxLabel1: TcxLabel
       Caption = 'Cadastro de Pessoas'
     end
-    inherited btnNovo: TcxButton
-      OnClick = btnNovoClick
-    end
     inherited btnConsultar: TcxButton
       OnClick = btnConsultarClick
     end
-    inherited btnEditar: TcxButton
-      Enabled = False
-      OnClick = btnEditarClick
-    end
     inherited btnConfirmar: TcxButton
       TabOrder = 9
-      OnClick = btnConfirmarClick
     end
     inherited btnCancelar: TcxButton
       TabOrder = 8
@@ -46,7 +38,19 @@ inherited FrmPessoas: TFrmPessoas
       TabOrder = 11
       Width = 521
     end
-    object edtCPF: TcxDBTextEdit [12]
+    object DBLookupComboBox1: TDBLookupComboBox [12]
+      Left = 107
+      Top = 214
+      Width = 521
+      Height = 23
+      DataField = 'tipo'
+      DataSource = DSCadastro
+      KeyField = 'id'
+      ListField = 'descricao'
+      ListSource = DSLookup
+      TabOrder = 13
+    end
+    object edtCPF: TcxDBTextEdit [13]
       Left = 107
       Top = 163
       DataBinding.DataField = 'cpf'
@@ -59,23 +63,8 @@ inherited FrmPessoas: TFrmPessoas
       TabOrder = 12
       Width = 521
     end
-    object DBLookupComboBox1: TDBLookupComboBox [13]
-      Left = 107
-      Top = 214
-      Width = 521
-      Height = 23
-      DataField = 'tipo'
-      DataSource = DSCadastro
-      KeyField = 'id'
-      ListField = 'descricao'
-      ListSource = DSLookup
-      TabOrder = 13
-    end
     inherited dxLayoutGroup4: TdxLayoutGroup
       ItemIndex = 4
-    end
-    inherited dxLayoutItem4: TdxLayoutItem
-      Enabled = False
     end
     inherited dxLayoutAutoCreatedGroup1: TdxLayoutAutoCreatedGroup
       Index = 0
@@ -95,17 +84,6 @@ inherited FrmPessoas: TFrmPessoas
       ControlOptions.ShowBorder = False
       Index = 2
     end
-    object liedtCPF: TdxLayoutItem
-      Parent = dxLayoutGroup4
-      AlignHorz = ahClient
-      CaptionOptions.Text = 'CPF'
-      CaptionOptions.Layout = clTop
-      Control = edtCPF
-      ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 121
-      ControlOptions.ShowBorder = False
-      Index = 3
-    end
     object cbxLookupTipoPessoa: TdxLayoutItem
       Parent = dxLayoutGroup4
       CaptionOptions.Text = 'Tipo Pessoa'
@@ -115,6 +93,16 @@ inherited FrmPessoas: TFrmPessoas
       ControlOptions.OriginalWidth = 145
       ControlOptions.ShowBorder = False
       Index = 4
+    end
+    object dxLayoutItem14: TdxLayoutItem
+      Parent = dxLayoutGroup4
+      CaptionOptions.Text = 'CPF'
+      CaptionOptions.Layout = clTop
+      Control = edtCPF
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 3
     end
   end
   inherited CadastroMemTable: TFDMemTable

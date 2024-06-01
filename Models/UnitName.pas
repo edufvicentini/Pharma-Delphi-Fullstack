@@ -99,6 +99,7 @@ type
   TAtendimentoServicoTableDictionary = class
   private
     Fid: TDictionaryAttribute;
+    Fvalor: TDictionaryAttribute;
     Fcreated_at: TDictionaryAttribute;
     Fupdated_at: TDictionaryAttribute;
     FAtendimento: TDictionaryAssociation;
@@ -106,6 +107,7 @@ type
   public
     constructor Create;
     property id: TDictionaryAttribute read Fid;
+    property valor: TDictionaryAttribute read Fvalor;
     property created_at: TDictionaryAttribute read Fcreated_at;
     property updated_at: TDictionaryAttribute read Fupdated_at;
     property Atendimento: TDictionaryAssociation read FAtendimento;
@@ -250,6 +252,7 @@ constructor TAtendimentoServicoTableDictionary.Create;
 begin
   inherited;
   Fid := TDictionaryAttribute.Create('id');
+  Fvalor := TDictionaryAttribute.Create('valor');
   Fcreated_at := TDictionaryAttribute.Create('created_at');
   Fupdated_at := TDictionaryAttribute.Create('updated_at');
   FAtendimento := TDictionaryAssociation.Create('Atendimento');

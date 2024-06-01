@@ -22,7 +22,8 @@ uses
   dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
   dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint, dxSkinWXI,
   dxSkinXmas2008Blue, cxClasses, dxLayoutContainer, dxLayoutControl,
-  Vcl.StdCtrls, dxCustomTileControl, dxTileControl, CadPessoas, CadServicos;
+  Vcl.StdCtrls, dxCustomTileControl, dxTileControl, CadPessoas, CadServicos,
+  CadAtendimentos;
 
 type
   TPrincipal = class(TForm)
@@ -42,6 +43,8 @@ type
     procedure btnSairClick(Sender: TdxTileControlItem);
     procedure btnPessoasClick(Sender: TdxTileControlItem);
     procedure btnServiçosClick(Sender: TdxTileControlItem);
+    procedure btnAtendimentosClick(Sender: TdxTileControlItem);
+    procedure btnSobreClick(Sender: TdxTileControlItem);
   private
     { Private declarations }
   public
@@ -54,6 +57,14 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TPrincipal.btnAtendimentosClick(Sender: TdxTileControlItem);
+var
+  cad: TFrmAtendimentos;
+begin
+  cad := TFrmAtendimentos.Create(self);
+  cad.Show;
+end;
 
 procedure TPrincipal.btnPessoasClick(Sender: TdxTileControlItem);
 var
@@ -74,6 +85,11 @@ var
 begin
   cad := TFrmServicos.Create(self);
   cad.Show;
+end;
+
+procedure TPrincipal.btnSobreClick(Sender: TdxTileControlItem);
+begin
+  ShowMessage('Projeto realizado por Eduardo Frota Vicentini.');
 end;
 
 end.

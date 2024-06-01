@@ -76,6 +76,7 @@ type
     procedure CadastroMemTableAfterInsert(DataSet: TDataSet);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
+    procedure insereOuEdita;
   private
     procedure updateGUI;
   public
@@ -89,15 +90,26 @@ implementation
 
 {$R *.dfm}
 
-procedure TCadM.btnCancelarClick(Sender: TObject);
+procedure TCadM.insereOuEdita;
 begin
-  CadastroMemTable.Cancel;
+  if CadastroMemTable.State in [dsEdit, dsInsert] then
+    Exit;
+
+  if CadastroMemTable.FieldByname('id').AsString = '' then
+    btnNovo.Click
+  else
+    btnEditar.Click;
 end;
 
 procedure TCadM.btnConfirmarClick(Sender: TObject);
 begin
   if CadastroMemTable.State in [dsEdit, dsInsert] then
     CadastroMemTable.Post;
+end;
+
+procedure TCadM.btnCancelarClick(Sender: TObject);
+begin
+  CadastroMemTable.Cancel;
 end;
 
 procedure TCadM.btnEditarClick(Sender: TObject);

@@ -1,8 +1,9 @@
 CREATE TABLE atendimentos_servicos (
-  id INT NOT NULL,
+  id INT AUTO_INCREMENT NOT NULL,
   atendimento INT NOT NULL,
   servico INT NOT NULL,
-  created_at DATETIME,
+  valor FLOAT(50) NOT NULL,
+  created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   PRIMARY KEY (id)
 );
@@ -14,9 +15,9 @@ CREATE TABLE pessoas (
   tipo INT NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
-  PRIMARY KEY (id)               
+  PRIMARY KEY (id)
 );
-
+                                          
 CREATE TABLE pessoas_tipo (
   id INT NOT NULL,
   descricao VARCHAR(100) NOT NULL,
@@ -40,9 +41,9 @@ CREATE TABLE servicos (
   id INT AUTO_INCREMENT NOT NULL,
   descricao VARCHAR(100) NOT NULL,
   valor FLOAT(50) NOT NULL,
-  tipo INT NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
+  tipo INT NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -90,7 +91,6 @@ ALTER TABLE atendimentos_servicos ADD CONSTRAINT servicos_atendimentos_servicos
   ON DELETE RESTRICT
   ON UPDATE RESTRICT;
 
-# 
 INSERT INTO pessoas_tipo (`id`, `descricao`, `created_at`, `updated_at`) VALUES ('1', 'Paciente', '2024-05-30 16:22:37', '2024-05-30 16:22:37');
 INSERT INTO pessoas_tipo (`id`, `descricao`, `created_at`, `updated_at`) VALUES ('2', 'Farmacêutico', '2024-05-30 00:00:00', '2024-05-30 00:00:00');
 INSERT INTO servicos_tipo (`id`, `descricao`, `created_at`, `updated_at`) VALUES ('1', 'Atenção Farmaceutica Domiciliar', '2024-05-30 00:00:00', '2024-05-30 00:00:00'); 

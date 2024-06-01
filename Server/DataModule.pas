@@ -38,6 +38,7 @@ procedure TServerContainer.XDataServerModuleCreate(Sender: TObject;
   Module: TXDataServerModule);
 begin
   Module.AddMiddleware(TCorsMiddleware.Create);
+//  Module.PutMode := TXDataPutMode.Merge;
 end;
 
 end.
